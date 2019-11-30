@@ -22,7 +22,7 @@ class TopBarFlights extends StatelessWidget {
 
   Widget _buildContent(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.3 / 2,
+      height: MediaQuery.of(context).size.height * 0.15,
       child: Column(
         children: <Widget>[
           Text(
@@ -92,6 +92,6 @@ class TopBarFlights extends StatelessWidget {
     );
   }
 
-  // VALUES
+
 
 }
