@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workshop/ui/base/base_view.dart';
+import 'package:workshop/ui/flights/first_part.dart';
 import 'package:workshop/ui/flights/flights_vm.dart';
 import 'package:workshop/ui/flights/main_container.dart';
 import 'package:workshop/ui/flights/top_bar.dart';
@@ -28,7 +29,9 @@ class FlightsV extends StatelessWidget {
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,
-                  child: MainContainer(),
+                  child: MainContainer(
+                    child: FirstPart(),
+                  ),
                 ),
               ],
             ),

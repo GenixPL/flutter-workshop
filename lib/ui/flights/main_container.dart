@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
 class MainContainer extends StatelessWidget {
+  final Widget child;
+
+  MainContainer({
+    @required this.child,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -45,7 +51,7 @@ class MainContainer extends StatelessWidget {
             ),
             Expanded(
               flex: 90,
-              child: Container(),
+              child: child,
             ),
           ],
         ),
