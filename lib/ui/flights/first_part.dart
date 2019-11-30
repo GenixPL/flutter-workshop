@@ -86,7 +86,7 @@ class _FirstPartState extends State<FirstPart>
         i = i -
             textFromFull.length -
             textTo1Full.length -
-            textPassengersFull.length;
+            textTo2Full.length;
 
         textFrom = textFromFull;
         textTo1 = textTo1Full;
