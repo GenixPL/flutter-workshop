@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:workshop/ui/tickets/bottom_bart.dart';
+import 'package:workshop/ui/tickets/bottom/bottom_bart.dart';
 
 class MenuButton extends StatelessWidget {
   final double size = 28;

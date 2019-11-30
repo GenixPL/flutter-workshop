@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:workshop/enums/events.dart';
 import 'package:workshop/models/event_m.dart';
-import 'package:workshop/ui/tickets/expanded_event_item.dart';
-import 'package:workshop/ui/tickets/menu_button.dart';
-import 'package:workshop/ui/tickets/sheet_header.dart';
+import 'package:workshop/ui/tickets/bottom/expanded_event_item.dart';
+import 'package:workshop/ui/tickets/bottom/menu_button.dart';
+import 'package:workshop/ui/tickets/bottom/sheet_header.dart';
 
 /// bottom bar's min height
 const double minHeight = 120;

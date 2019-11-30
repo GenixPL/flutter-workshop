@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workshop/ui/base/base_view.dart';
-import 'package:workshop/ui/tickets/bottom_bart.dart';
+import 'package:workshop/ui/tickets/bottom/bottom_bart.dart';
+import 'package:workshop/ui/tickets/cards/sliding_cards_v.dart';
 import 'package:workshop/ui/tickets/tickets_vm.dart';
 
 class TicketsV extends StatelessWidget {
@@ -18,8 +19,11 @@ class TicketsV extends StatelessWidget {
       child: Stack(
         children: [
           Align(
-            alignment: Alignment.center,
-            child: Text('BODY'),
+            alignment: Alignment.topCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 60),
+              child: SlidingCardsV(),
+            ),
           ),
           BottomBar(),
         ],
