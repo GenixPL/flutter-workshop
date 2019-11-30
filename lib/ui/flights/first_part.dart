@@ -21,14 +21,45 @@ class FirstPart extends StatelessWidget {
                           Expanded(
                             flex: 6,
                             child: Container(
-                              color: Colors.amber,
-                              child: Column(),
+                              color: Colors.amber, // to remove
+                              child: Column(
+                                children: <Widget>[
+                                  Expanded(
+                                    child: _buildRowWithIconAndText(
+                                      Icons.flight_takeoff,
+                                      'From',
+                                      'Kochfurt',
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: _buildRowWithIconAndText(
+                                      Icons.flight_land,
+                                      'To',
+                                      'Lake XanderLand',
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: _buildRowWithIconAndText(
+                                      Icons.flight_land,
+                                      'To',
+                                      'South Darian',
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: _buildRowWithIconAndText(
+                                      Icons.person,
+                                      'Passengers',
+                                      '4',
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           Expanded(
                             flex: 2,
                             child: Container(
-                              color: Colors.amberAccent,
+                              color: Colors.amberAccent, // to remove
                               child: Column(),
                             ),
                           ),
@@ -63,5 +94,29 @@ class FirstPart extends StatelessWidget {
     IconData iconData,
     String label,
     String content,
-  ) {}
+  ) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: <Widget>[
+        Expanded(
+          flex: 3,
+          child: Icon(
+            iconData,
+            color: Colors.redAccent,
+          ),
+        ),
+        Expanded(
+          flex: 7,
+          child: TextField(
+            controller: TextEditingController.fromValue(
+              TextEditingValue(text: content),
+            ),
+            decoration: InputDecoration(
+              labelText: label,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 }
