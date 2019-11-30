@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:workshop/navigation/router.dart';
 import 'package:workshop/utils/locator.dart';
 
@@ -16,6 +17,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     debugPaintSizeEnabled = false;
+
+    SystemChrome.setEnabledSystemUIOverlays([]);
 
     return MaterialApp(
       initialRoute: initRoute,

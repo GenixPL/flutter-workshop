@@ -6,13 +6,13 @@ class TopBar extends StatelessWidget {
     return Positioned(
       top: 0,
       left: 0,
-      height: 120,
+      height: 160,
       width: MediaQuery.of(context).size.width,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.fromLTRB(32, 16, 0, 0),
+            padding: const EdgeInsets.fromLTRB(32, 44, 0, 0),
             child: Text(
               'Shenzhen',
               style: TextStyle(

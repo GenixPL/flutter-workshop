@@ -61,7 +61,7 @@ class _BottomBarState extends State<BottomBar>
         left: 0,
         right: 0,
         bottom: 0,
-        child: SafeArea(child: _buildContainer()),
+        child: _buildContainer(),
       ),
     );
   }
@@ -187,12 +187,12 @@ class _BottomBarState extends State<BottomBar>
     return lerpDouble(min, max, _anim.value);
   }
 
-  double get maxHeight => MediaQuery.of(context).size.height * 0.9;
+  double get maxHeight => MediaQuery.of(context).size.height + 50;
 
   double get headerFontSize => lerp(14, 24);
 
   double get headerTopMargin {
-    return lerp(20, 20 + MediaQuery.of(context).padding.top);
+    return lerp(20, 60 + MediaQuery.of(context).padding.top);
   }
 
   double get itemBorderRadius => lerp(8, 24);

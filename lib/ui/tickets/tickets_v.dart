@@ -16,17 +16,15 @@ class TicketsV extends StatelessWidget {
   }
 
   Widget _buildBody() {
-    return SafeArea(
-      child: Stack(
-        children: [
-          TopBar(),
-          Align(
-            alignment: Alignment.center,
-            child: SlidingCardsV(),
-          ),
-          BottomBar(),
-        ],
-      ),
+    return Stack(
+      children: [
+        TopBar(),
+        Align(
+          alignment: Alignment.center,
+          child: SlidingCardsV(),
+        ),
+        BottomBar(),
+      ],
     );
   }
 }
