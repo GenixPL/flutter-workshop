@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workshop/enums/routes.dart';
 import 'package:workshop/ui/home/home_v.dart';
+import 'package:workshop/ui/tickets/tickets_v.dart';
 import 'package:workshop/utils/logger.dart';
 
 import 'stack.dart' as s;
@@ -21,6 +22,9 @@ class Router with NavigatorObserver {
     switch (settings.name) {
       case homeRoute:
         return MaterialPageRoute(builder: (_) => HomeV());
+
+      case ticketsRoute:
+        return MaterialPageRoute(builder: (_) => TicketsV());
 
       default:
         return _errorRoute('No path specified for: ${settings.name}.');
