@@ -3,6 +3,7 @@ import 'package:workshop/ui/base/base_view.dart';
 import 'package:workshop/ui/flights/first_part.dart';
 import 'package:workshop/ui/flights/flights_vm.dart';
 import 'package:workshop/ui/flights/main_container.dart';
+import 'package:workshop/ui/flights/second_part.dart';
 import 'package:workshop/ui/flights/top_bar.dart';
 
 class FlightsV extends StatefulWidget {
@@ -62,7 +63,7 @@ class _FlightsVState extends State<FlightsV> {
       );
     } else if (_stage == 1) {
       return MainContainer(
-        child: Container(color: Colors.redAccent),
+        child: SecondPart(),
         textBtn1: 'Price',
         textBtn2: 'Duration',
         textBtn3: 'Stops',

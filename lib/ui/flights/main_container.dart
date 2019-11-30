@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// TODO: animate text on change
+
 class MainContainer extends StatelessWidget {
   final Widget child;
   final String textBtn1;
@@ -73,11 +75,14 @@ class MainContainer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Spacer(),
-          Text(
-            text,
-            style: TextStyle(
-              color: isActive ? Colors.grey[600] : Colors.grey,
+          AnimatedSwitcher(
+            child: Text(
+              text,
+              style: TextStyle(
+                color: isActive ? Colors.grey[600] : Colors.grey,
+              ),
             ),
+            duration: Duration(milliseconds: 1000),
           ),
           Spacer(),
           Container(
