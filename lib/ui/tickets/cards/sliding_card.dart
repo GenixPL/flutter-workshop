@@ -22,8 +22,8 @@ class SlidingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double gauss = math.exp(-(math.pow((offset.abs() % 1 - 0.5), 2) / 0.08));
-    double xAlign = (offset.abs() - index);
+    double gauss = math.exp(-(math.pow((offset.abs() - 0.5), 2) / 0.08));
+    double xAlign = offset;
 
     return Transform.translate(
       offset: Offset(-32 * gauss * offset.sign, 0),
