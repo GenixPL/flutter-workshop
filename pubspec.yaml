@@ -25,3 +25,8 @@ flutter:
 
   assets:
     - assets/
+
+  fonts:
+    - family: Yellowtail
+      fonts:
+        - asset: fonts/Yellowtail-Regular.ttf
