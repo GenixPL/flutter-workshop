@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:workshop/enums/routes.dart';
 import 'package:workshop/ui/base/base_view.dart';
-import 'package:workshop/ui/home/home_vm.dart';
+import 'package:workshop/ui/flights/flights_vm.dart';
 
-class HomeV extends StatelessWidget {
+class FlightsV extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BaseView<HomeVM>(
+    return BaseView<FlightsVM>(
       builder: (context, model, child) => Scaffold(
-        appBar: AppBar(title: Text('Home')),
+        appBar: AppBar(title: Text('Flights')),
         body: _buildBody(context),
       ),
     );
@@ -21,16 +21,7 @@ class HomeV extends StatelessWidget {
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            RaisedButton(
-              color: Colors.amber,
-              child: Text('Tickets'),
-              onPressed: () => Navigator.pushNamed(context, ticketsRoute),
-            ),
-            RaisedButton(
-              color: Colors.amber,
-              child: Text('Flights'),
-              onPressed: () => Navigator.pushNamed(context, flightsRoute),
-            ),
+            
           ],
         ),
       ],

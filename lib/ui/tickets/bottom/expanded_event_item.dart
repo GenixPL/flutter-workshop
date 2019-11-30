@@ -45,6 +45,10 @@ class ExpandedEventItem extends StatelessWidget {
   }
 
   Widget _buildContent() {
+    if (isVisible == false) {
+      return Container();
+    }
+
     return Column(
       children: <Widget>[
         AutoSizeText(

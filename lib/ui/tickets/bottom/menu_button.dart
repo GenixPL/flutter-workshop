@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:workshop/ui/tickets/bottom/bottom_bart.dart';
 
 class MenuButton extends StatelessWidget {
+  final double barMinHeight;
+
   final double size = 28;
-  
+
+  MenuButton({
+    @required this.barMinHeight,
+  });
+
   @override
   Widget build(BuildContext context) {
-    var bottomPadding = (minHeight - size) / 2;
-    
-    return Positioned(  
+    var bottomPadding = (barMinHeight - size) / 2;
+
+    return Positioned(
       right: 0,
       bottom: bottomPadding,
       child: Icon(

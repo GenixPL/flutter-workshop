@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:workshop/enums/events.dart';
-import 'package:workshop/models/event_m.dart';
 import 'package:workshop/ui/tickets/cards/sliding_card.dart';
 
 class SlidingCardsV extends StatefulWidget {
   @override
   _SlidingCardsVState createState() => _SlidingCardsVState();
 }
+
+// TODO sliding doesn't work after 2. card
 
 class _SlidingCardsVState extends State<SlidingCardsV> {
   PageController pageController;

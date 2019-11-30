@@ -9,16 +9,6 @@ import 'package:workshop/ui/tickets/bottom/expanded_event_item.dart';
 import 'package:workshop/ui/tickets/bottom/menu_button.dart';
 import 'package:workshop/ui/tickets/bottom/sheet_header.dart';
 
-/// bottom bar's min height
-const double minHeight = 120;
-
-const double iconStartSize = 44;
-const double iconEndSize = 120;
-const double iconStartMarginTop = 36;
-const double iconEndMarginTop = 60;
-const double iconsVerticalSpacing = 24;
-const double iconsHorizontalSpacing = 16;
-
 class BottomBar extends StatefulWidget {
   @override
   _BottomBarState createState() => _BottomBarState();
@@ -30,11 +20,19 @@ class _BottomBarState extends State<BottomBar>
 
   Duration durtaion = Duration(milliseconds: 600);
 
+  /// bottom bar's min height
+  double minHeight = 140;
+
+  double iconStartSize = 44;
+  double iconEndSize = 120;
+  double iconStartMarginTop = 36;
+  double iconEndMarginTop = 60;
+  double iconsVerticalSpacing = 24;
+  double iconsHorizontalSpacing = 16;
+
   @override
   initState() {
     super.initState();
-
-    SystemChrome.setEnabledSystemUIOverlays([]);
 
     _anim = AnimationController(
       vsync: this,
@@ -63,7 +61,7 @@ class _BottomBarState extends State<BottomBar>
         left: 0,
         right: 0,
         bottom: 0,
-        child: _buildContainer(),
+        child: SafeArea(child: _buildContainer()),
       ),
     );
   }
@@ -95,7 +93,9 @@ class _BottomBarState extends State<BottomBar>
         ),
         for (EventM event in events) _buildFullItem(event),
         for (EventM event in events) _buildIcon(event),
-        MenuButton(),
+        MenuButton(
+          barMinHeight: minHeight,
+        ),
       ],
     );
   }
@@ -187,7 +187,7 @@ class _BottomBarState extends State<BottomBar>
     return lerpDouble(min, max, _anim.value);
   }
 
-  double get maxHeight => MediaQuery.of(context).size.height;
+  double get maxHeight => MediaQuery.of(context).size.height * 0.9;
 
   double get headerFontSize => lerp(14, 24);
 
