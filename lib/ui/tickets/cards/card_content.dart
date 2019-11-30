@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class CardContent extends StatelessWidget {
@@ -20,8 +21,9 @@ class CardContent extends StatelessWidget {
         children: <Widget>[
           Transform.translate(
              offset: Offset(8 * offset, 0),
-            child: Text(
+            child: AutoSizeText(
               name,
+              maxLines: 1,
               style: TextStyle(fontSize: 20),
             ),
           ),
@@ -39,8 +41,8 @@ class CardContent extends StatelessWidget {
               Transform.translate(
                 offset: Offset(48 * offset, 0),
                 child: RaisedButton(
-                  color: Color(0xFF162A49),
-                  child: Text('Reserve'),
+                  color: Colors.grey[850],
+                  child: Text('Reserve', style: TextStyle(color: Colors.amber),),
                   textColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(32),
