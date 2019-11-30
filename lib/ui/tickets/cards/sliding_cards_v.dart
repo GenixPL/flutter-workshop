@@ -7,9 +7,6 @@ class SlidingCardsV extends StatefulWidget {
   _SlidingCardsVState createState() => _SlidingCardsVState();
 }
 
-// TODO add chaning spacing between cards
-// TODO add top bar
-
 class _SlidingCardsVState extends State<SlidingCardsV> {
   PageController pageController;
   double previousOffset = 0;
@@ -44,7 +41,7 @@ class _SlidingCardsVState extends State<SlidingCardsV> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.65,
+      height: MediaQuery.of(context).size.height * 0.55,
       child: PageView(
         controller: pageController,
         children: <Widget>[

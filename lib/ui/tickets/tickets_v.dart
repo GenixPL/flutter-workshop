@@ -3,6 +3,7 @@ import 'package:workshop/ui/base/base_view.dart';
 import 'package:workshop/ui/tickets/bottom/bottom_bar.dart';
 import 'package:workshop/ui/tickets/cards/sliding_cards_v.dart';
 import 'package:workshop/ui/tickets/tickets_vm.dart';
+import 'package:workshop/ui/tickets/top/top_bar.dart';
 
 class TicketsV extends StatelessWidget {
   @override
@@ -18,12 +19,10 @@ class TicketsV extends StatelessWidget {
     return SafeArea(
       child: Stack(
         children: [
+          TopBar(),
           Align(
-            alignment: Alignment.topCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 60),
-              child: SlidingCardsV(),
-            ),
+            alignment: Alignment.center,
+            child: SlidingCardsV(),
           ),
           BottomBar(),
         ],
