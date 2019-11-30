@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:workshop/enums/events.dart';
 import 'package:workshop/models/event_m.dart';
+import 'package:workshop/ui/tickets/expanded_event_item.dart';
 import 'package:workshop/ui/tickets/menu_button.dart';
 import 'package:workshop/ui/tickets/sheet_header.dart';
 
@@ -14,7 +15,7 @@ const double minHeight = 120;
 const double iconStartSize = 44;
 const double iconEndSize = 120;
 const double iconStartMarginTop = 36;
-const double iconEndMarginTop = 80;
+const double iconEndMarginTop = 60;
 const double iconsVerticalSpacing = 24;
 const double iconsHorizontalSpacing = 16;
 
@@ -92,6 +93,7 @@ class _BottomBarState extends State<BottomBar>
           fontSize: headerFontSize,
           topMargin: headerTopMargin,
         ),
+        for (EventM event in events) _buildFullItem(event),
         for (EventM event in events) _buildIcon(event),
         MenuButton(),
       ],
@@ -107,7 +109,10 @@ class _BottomBarState extends State<BottomBar>
       top: iconTopMargin(index),
       left: iconLeftMargin(index),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(itemBorderRadius),
+        borderRadius: BorderRadius.horizontal(
+          left: Radius.circular(iconLeftBorderRadius),
+          right: Radius.circular(iconRightBorderRadius),
+        ),
         child: Image.asset(
           event.assetName,
           fit: BoxFit.cover,
@@ -118,6 +123,19 @@ class _BottomBarState extends State<BottomBar>
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildFullItem(EventM event) {
+    int index = events.indexOf(event);
+    return ExpandedEventItem(
+      topMargin: iconTopMargin(index),
+      leftMargin: iconLeftMargin(index),
+      height: iconSize,
+      isVisible: _anim.status == AnimationStatus.completed,
+      borderRadius: itemBorderRadius,
+      title: event.title,
+      date: event.date,
     );
   }
 
@@ -193,4 +211,8 @@ class _BottomBarState extends State<BottomBar>
   double iconLeftMargin(int index) {
     return lerp(index * (iconsHorizontalSpacing + iconStartSize), 0);
   }
+
+  double get iconLeftBorderRadius => itemBorderRadius;
+
+  double get iconRightBorderRadius => lerp(8, 0);
 }
