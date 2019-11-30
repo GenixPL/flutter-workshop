@@ -3,6 +3,10 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:workshop/ui/tickets/menu_button.dart';
+import 'package:workshop/ui/tickets/sheet_header.dart';
+
+const double minHeight = 60;
 
 class BottomBar extends StatefulWidget {
   @override
@@ -13,13 +17,16 @@ class _BottomBarState extends State<BottomBar>
     with SingleTickerProviderStateMixin {
   AnimationController _anim;
 
-  double minHeight = 60;
   double get maxHeight => MediaQuery.of(context).size.height;
 
   Duration durtaion = Duration(milliseconds: 600);
 
   // similar to Tween - changes value depending on animation's value
   double lerp(double min, double max) => lerpDouble(min, max, _anim.value);
+
+  double get headerFontSize => lerp(14, 24);
+  double get headerTopMargin =>
+      lerp(20, 20 + MediaQuery.of(context).padding.top);
 
   @override
   void initState() {
@@ -72,7 +79,20 @@ class _BottomBarState extends State<BottomBar>
           color: Colors.grey[850],
           borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
         ),
+        child: _buildContainerContent(),
       ),
+    );
+  }
+
+  Widget _buildContainerContent() {
+    return Stack(
+      children: <Widget>[
+        SheetHeader(
+          fontSize: headerFontSize,
+          topMargin: headerTopMargin,
+        ),
+        MenuButton(),
+      ],
     );
   }
 
