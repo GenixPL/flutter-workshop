@@ -22,7 +22,9 @@ class SlidingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     double gauss = math.exp(-(math.pow((offset.abs() % 1 - 0.5), 2) / 0.08));
     double xAlign = 0.4 * gauss;
-    if (!swipesLeft) xAlign *= (-1);
+    if (!swipesLeft) {
+      xAlign *= (-1);
+    }
 
     return Transform.translate(
       offset: Offset(-32 * gauss * offset.sign, 0),

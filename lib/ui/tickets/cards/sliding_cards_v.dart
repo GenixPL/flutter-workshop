@@ -8,7 +8,7 @@ class SlidingCardsV extends StatefulWidget {
 }
 
 // TODO add chaning spacing between cards
-// TODO left right
+// TODO add top bar
 
 class _SlidingCardsVState extends State<SlidingCardsV> {
   PageController pageController;
@@ -57,15 +57,15 @@ class _SlidingCardsVState extends State<SlidingCardsV> {
           ),
           SlidingCard(
             name: 'Shenzhen GLOBAL DESIGN AWARD 2018',
-            date: events[0].date,
-            assetName: events[0].assetName,
+            date: events[2].date,
+            assetName: events[2].assetName,
             offset: pageOffset,
             swipesLeft: swipesLeft,
           ),
           SlidingCard(
             name: 'Shenzhen GLOBAL DESIGN AWARD 2018',
-            date: events[2].date,
-            assetName: events[2].assetName,
+            date: events[0].date,
+            assetName: events[0].assetName,
             offset: pageOffset,
             swipesLeft: swipesLeft,
           ),
