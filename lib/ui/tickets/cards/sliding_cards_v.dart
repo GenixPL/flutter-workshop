@@ -7,11 +7,14 @@ class SlidingCardsV extends StatefulWidget {
   _SlidingCardsVState createState() => _SlidingCardsVState();
 }
 
-// TODO sliding doesn't work after 2. card
+// TODO add chaning spacing between cards
+// TODO left right
 
 class _SlidingCardsVState extends State<SlidingCardsV> {
   PageController pageController;
+  double previousOffset = 0;
   double pageOffset = 0;
+  bool swipesLeft = true;
 
   @override
   void initState() {
@@ -19,7 +22,16 @@ class _SlidingCardsVState extends State<SlidingCardsV> {
 
     pageController = PageController(viewportFraction: 0.8);
     pageController.addListener(() {
-      setState(() => pageOffset = pageController.page);
+      setState(() {
+        previousOffset = pageOffset;
+        pageOffset = pageController.page;
+
+        if (previousOffset < pageOffset) {
+          swipesLeft = true;
+        } else {
+          swipesLeft = false;
+        }
+      });
     });
   }
 
@@ -36,24 +48,27 @@ class _SlidingCardsVState extends State<SlidingCardsV> {
       child: PageView(
         controller: pageController,
         children: <Widget>[
-            SlidingCard(
-              name: 'Shenzhen GLOBAL DESIGN AWARD 2018',
-              date: events[0].date,
-              assetName: events[0].assetName,
-              offset: pageOffset,
-            ),
-            SlidingCard(
-              name: 'Shenzhen GLOBAL DESIGN AWARD 2018',
-              date: events[0].date,
-              assetName: events[0].assetName,
-              offset: pageOffset,
-            ),
-            SlidingCard(
-              name: 'Shenzhen GLOBAL DESIGN AWARD 2018',
-              date: events[2].date,
-              assetName: events[2].assetName,
-              offset: pageOffset,
-            ),
+          SlidingCard(
+            name: 'Shenzhen GLOBAL DESIGN AWARD 2018',
+            date: events[0].date,
+            assetName: events[0].assetName,
+            offset: pageOffset,
+            swipesLeft: swipesLeft,
+          ),
+          SlidingCard(
+            name: 'Shenzhen GLOBAL DESIGN AWARD 2018',
+            date: events[0].date,
+            assetName: events[0].assetName,
+            offset: pageOffset,
+            swipesLeft: swipesLeft,
+          ),
+          SlidingCard(
+            name: 'Shenzhen GLOBAL DESIGN AWARD 2018',
+            date: events[2].date,
+            assetName: events[2].assetName,
+            offset: pageOffset,
+            swipesLeft: swipesLeft,
+          ),
         ],
       ),
     );

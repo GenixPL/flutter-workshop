@@ -8,17 +8,21 @@ class SlidingCard extends StatelessWidget {
   final String date;
   final String assetName;
   final double offset;
+  final bool swipesLeft;
 
   const SlidingCard({
     @required this.name,
     @required this.date,
     @required this.assetName,
     @required this.offset,
+    @required this.swipesLeft,
   });
 
   @override
   Widget build(BuildContext context) {
-    double gauss = math.exp(-(math.pow((offset.abs() - 0.5), 2) / 0.08)) % 1;
+    double gauss = math.exp(-(math.pow((offset.abs() % 1 - 0.5), 2) / 0.08));
+    double xAlign = 0.4 * gauss;
+    if (!swipesLeft) xAlign *= (-1);
 
     return Transform.translate(
       offset: Offset(-32 * gauss * offset.sign, 0),
@@ -35,7 +39,7 @@ class SlidingCard extends StatelessWidget {
               child: Image.asset(
                 assetName,
                 height: MediaQuery.of(context).size.height * 0.3,
-                alignment: Alignment(gauss / 15, 0),
+                alignment: Alignment(xAlign, 0),
                 fit: BoxFit.none,
               ),
             ),
