@@ -2,7 +2,6 @@ import 'dart:ui';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:workshop/enums/events.dart';
 import 'package:workshop/models/event_m.dart';
 import 'package:workshop/ui/tickets/bottom/expanded_event_item.dart';

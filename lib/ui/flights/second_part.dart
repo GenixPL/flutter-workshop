@@ -1,23 +1,77 @@
 import 'package:flutter/material.dart';
 
 class SecondPart extends StatefulWidget {
+  final double mainContainerSize;
+  final double availableHeight;
+  final double availableWidth;
+
+  SecondPart({
+    @required this.mainContainerSize,
+    @required this.availableHeight,
+    @required this.availableWidth,
+  });
+
   @override
   _SecondPartState createState() => _SecondPartState();
 }
 
-class _SecondPartState extends State<SecondPart> {
-  var _availableHeight;
-  var _availableWidth;
-  double iconSize = 32;
+class _SecondPartState extends State<SecondPart> with TickerProviderStateMixin {
+  double iconSize = 44;
+
+  AnimationController _planeSizeController;
+  Animation _placeSizeAnimation;
+
+  AnimationController _planePositionController;
+  Animation _planePositionCurve;
+  Animation<double> _placePositionAnimation;
+
+  @override
+  initState() {
+    super.initState();
+
+    _planePositionController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 1500),
+    );
+
+    _planeSizeController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 500),
+    )..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          _planePositionController.forward();
+        }
+      });
+
+    _placeSizeAnimation = Tween(
+      begin: 2.0,
+      end: 1.0,
+    ).animate(_planeSizeController);
+
+    _planePositionCurve = CurvedAnimation(
+      parent: _planePositionController,
+      curve: Curves.easeInOutCubic,
+    );
+
+    _placePositionAnimation = Tween(
+      begin: (widget.availableHeight - 16 - iconSize),
+      end: (8.0),
+    ).animate(_planePositionCurve);
+
+    Future.delayed(Duration(milliseconds: 250)).then((_) {
+      _planeSizeController.forward();
+    });
+  }
+
+  @override
+  dispose() {
+    _planeSizeController.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    var mainContainerSize = (MediaQuery.of(context).size.height * 0.85) - 16;
-
-    // take text buttons into account
-    _availableHeight = mainContainerSize * 0.9;
-    _availableWidth = MediaQuery.of(context).size.width - 16;
-
     return Container(
       color: Colors.yellow, // to remove
       child: Row(
@@ -27,7 +81,7 @@ class _SecondPartState extends State<SecondPart> {
               color: Colors.blueAccent, // to remove
               child: Stack(
                 children: <Widget>[
-                  _buildPlane(),
+                  _buildPlaneAnimations(),
                 ],
               ),
             ),
@@ -37,18 +91,31 @@ class _SecondPartState extends State<SecondPart> {
     );
   }
 
-  Widget _buildPlane() {
+  Widget _buildPlaneAnimations() {
     // 16 for FAB padding
-    var top = _availableHeight - 16 - iconSize;
 
-    return Positioned(
-      top: top,
-      left: _availableWidth / 2 - iconSize / 2,
-      child: Container(
-        width: iconSize,
-        height: iconSize,
-        color: Colors.amberAccent,
+    return AnimatedBuilder(
+      animation: _placePositionAnimation,
+      builder: (context, child) => Positioned(
+        top: _placePositionAnimation.value,
+        left: widget.availableWidth / 2 - iconSize / 2,
+        child: AnimatedBuilder(
+          animation: _placeSizeAnimation,
+          child: _buildPlane(iconSize),
+          builder: (context, child) => Transform.scale(
+            child: child,
+            scale: _placeSizeAnimation.value,
+          ),
+        ),
       ),
+    );
+  }
+
+  Widget _buildPlane(double iconSize) {
+    return Icon(
+      Icons.airplanemode_active,
+      size: iconSize,
+      color: Colors.redAccent,
     );
   }
 }

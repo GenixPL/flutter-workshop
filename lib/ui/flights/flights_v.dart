@@ -63,7 +63,12 @@ class _FlightsVState extends State<FlightsV> {
       );
     } else if (_stage == 1) {
       return MainContainer(
-        child: SecondPart(),
+        child: SecondPart(
+          mainContainerSize: (MediaQuery.of(context).size.height * 0.85) - 16,
+          availableHeight:
+              ((MediaQuery.of(context).size.height * 0.85) - 16) * 0.9,
+          availableWidth: MediaQuery.of(context).size.width - 16,
+        ),
         textBtn1: 'Price',
         textBtn2: 'Duration',
         textBtn3: 'Stops',
