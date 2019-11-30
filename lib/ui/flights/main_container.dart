@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 
 class MainContainer extends StatelessWidget {
   final Widget child;
+  final String textBtn1;
+  final String textBtn2;
+  final String textBtn3;
 
   MainContainer({
     @required this.child,
+    @required this.textBtn1,
+    @required this.textBtn2,
+    @required this.textBtn3,
   });
 
   @override
@@ -41,9 +47,9 @@ class MainContainer extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      _button(context, 'Flight', true),
-                      _button(context, 'Train', false),
-                      _button(context, 'Bus', false),
+                      _button(context, textBtn1, true),
+                      _button(context, textBtn2, false),
+                      _button(context, textBtn3, false),
                     ],
                   ),
                 ],

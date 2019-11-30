@@ -5,7 +5,14 @@ import 'package:workshop/ui/flights/flights_vm.dart';
 import 'package:workshop/ui/flights/main_container.dart';
 import 'package:workshop/ui/flights/top_bar.dart';
 
-class FlightsV extends StatelessWidget {
+class FlightsV extends StatefulWidget {
+  @override
+  _FlightsVState createState() => _FlightsVState();
+}
+
+class _FlightsVState extends State<FlightsV> {
+  int _stage = 0;
+
   @override
   Widget build(BuildContext context) {
     return BaseView<FlightsVM>(
@@ -29,9 +36,7 @@ class FlightsV extends StatelessWidget {
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,
-                  child: MainContainer(
-                    child: FirstPart(),
-                  ),
+                  child: _getContentForStage(),
                 ),
               ],
             ),
@@ -39,5 +44,31 @@ class FlightsV extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Widget _getContentForStage() {
+    if (_stage == 0) {
+      return MainContainer(
+        child: FirstPart(
+          onFabTap: () {
+            setState(() {
+              _stage = 1;
+            });
+          },
+        ),
+        textBtn1: 'Flight',
+        textBtn2: 'Train',
+        textBtn3: 'Bus',
+      );
+    } else if (_stage == 1) {
+      return MainContainer(
+        child: Container(color: Colors.redAccent),
+        textBtn1: 'Price',
+        textBtn2: 'Duration',
+        textBtn3: 'Stops',
+      );
+    }
+
+    return Text('ERROR');
   }
 }

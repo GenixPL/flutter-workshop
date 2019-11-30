@@ -15,6 +15,12 @@ final int textLength = textFromFull.length +
     textArrivalFull.length;
 
 class FirstPart extends StatefulWidget {
+  final Function onFabTap;
+
+  FirstPart({
+    @required this.onFabTap,
+  });
+
   @override
   _FirstPartState createState() => _FirstPartState();
 }
@@ -83,10 +89,7 @@ class _FirstPartState extends State<FirstPart>
                   textTo1Full.length +
                   textTo2Full.length +
                   textPassengersFull.length) {
-        i = i -
-            textFromFull.length -
-            textTo1Full.length -
-            textTo2Full.length;
+        i = i - textFromFull.length - textTo1Full.length - textTo2Full.length;
 
         textFrom = textFromFull;
         textTo1 = textTo1Full;
@@ -363,7 +366,7 @@ class _FirstPartState extends State<FirstPart>
         Padding(
           padding: const EdgeInsets.only(bottom: 16),
           child: FloatingActionButton(
-            onPressed: () {},
+            onPressed: widget.onFabTap,
             backgroundColor: Colors.redAccent,
             child: Icon(Icons.timeline),
           ),
