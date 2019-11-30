@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workshop/ui/base/base_model.dart';
-import 'package:workshop/ui/locator.dart';
+import 'package:workshop/utils/locator.dart';
 
 class BaseView<T extends BaseModel> extends StatefulWidget {
   final Widget Function(BuildContext context, T model, Widget child) builder;
@@ -28,7 +28,7 @@ class _BaseViewState<T extends BaseModel> extends State<BaseView<T>> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<T>(
-      builder: (context) => model,
+      create: (context) => model,
       child: Consumer<T>(builder: widget.builder),
     );
   }

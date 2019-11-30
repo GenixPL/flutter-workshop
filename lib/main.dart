@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:workshop/ui/home/home_v.dart';
-import 'package:workshop/ui/locator.dart';
+import 'package:flutter/rendering.dart';
+import 'package:workshop/navigation/router.dart';
+import 'package:workshop/utils/locator.dart';
 
 void main() {
   setupLocator();
@@ -8,11 +9,25 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  final router = locator<Router>();
+
+  get initRoute => null;
+
   @override
   Widget build(BuildContext context) {
+    debugPaintSizeEnabled = false;
+
     return MaterialApp(
-      home: HomeV(),
+      initialRoute: initRoute,
+      debugShowCheckedModeBanner: false,
+      onGenerateRoute: router.generateRoute,
+      navigatorObservers: [router],
+      theme: theme,
     );
   }
 }
 
+ThemeData theme = ThemeData(
+  primaryColor: Colors.grey[850],
+  accentColor: Colors.amber,
+);
