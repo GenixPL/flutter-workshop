@@ -43,12 +43,7 @@ class _BottomBarState extends State<BottomBar>
   @override
   dispose() {
     _anim.dispose();
-
-    SystemChrome.setEnabledSystemUIOverlays([
-      SystemUiOverlay.top,
-      SystemUiOverlay.bottom,
-    ]);
-
+    
     super.dispose();
   }
 
