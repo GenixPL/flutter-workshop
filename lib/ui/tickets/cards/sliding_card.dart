@@ -9,6 +9,7 @@ class SlidingCard extends StatelessWidget {
   final String assetName;
   final double offset;
   final bool swipesLeft;
+  final int index;
 
   const SlidingCard({
     @required this.name,
@@ -16,15 +17,13 @@ class SlidingCard extends StatelessWidget {
     @required this.assetName,
     @required this.offset,
     @required this.swipesLeft,
+    @required this.index,
   });
 
   @override
   Widget build(BuildContext context) {
     double gauss = math.exp(-(math.pow((offset.abs() % 1 - 0.5), 2) / 0.08));
-    double xAlign = 0.4 * gauss;
-    if (!swipesLeft) {
-      xAlign *= (-1);
-    }
+    double xAlign = (offset.abs() - index);
 
     return Transform.translate(
       offset: Offset(-32 * gauss * offset.sign, 0),

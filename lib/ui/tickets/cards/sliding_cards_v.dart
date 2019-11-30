@@ -54,6 +54,7 @@ class _SlidingCardsVState extends State<SlidingCardsV> {
             assetName: events[0].assetName,
             offset: pageOffset,
             swipesLeft: swipesLeft,
+            index: 0,
           ),
           SlidingCard(
             name: 'Shenzhen GLOBAL DESIGN AWARD 2018',
@@ -61,6 +62,7 @@ class _SlidingCardsVState extends State<SlidingCardsV> {
             assetName: events[2].assetName,
             offset: pageOffset,
             swipesLeft: swipesLeft,
+            index: 1,
           ),
           SlidingCard(
             name: 'Shenzhen GLOBAL DESIGN AWARD 2018',
@@ -68,6 +70,7 @@ class _SlidingCardsVState extends State<SlidingCardsV> {
             assetName: events[0].assetName,
             offset: pageOffset,
             swipesLeft: swipesLeft,
+            index: 2,
           ),
         ],
       ),
