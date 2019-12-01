@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:workshop/ui/flights/animations/cards_anim.dart';
 import 'package:workshop/ui/flights/animations/plane_position_anim.dart';
@@ -24,9 +26,13 @@ class _SecondPartState extends State<SecondPart> with TickerProviderStateMixin {
   AnimationController _planeSizeController;
   AnimationController _planePositionController;
   AnimationController _cardsAnimationController;
+  AnimationController _fabController;
+  Animation _fabAnimation;
 
   double lineMaxHeight;
   double _planeStartPosition;
+
+  bool _isFabShown = false;
 
   @override
   initState() {
@@ -35,10 +41,26 @@ class _SecondPartState extends State<SecondPart> with TickerProviderStateMixin {
     lineMaxHeight = (widget.availableHeight - iconSize - 16) * 0.7;
     _planeStartPosition = widget.availableHeight - 16 - iconSize;
 
+    _fabController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 500),
+    );
+
+    _fabAnimation = Tween(
+      begin: pi * 0.25,
+      end: 0.0,
+    ).animate(_fabController);
+
     _cardsAnimationController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 1500),
-    );
+    )..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          setState(() {
+            _isFabShown = true;
+          });
+        }
+      });
 
     _planePositionController = AnimationController(
       vsync: this,
@@ -85,6 +107,29 @@ class _SecondPartState extends State<SecondPart> with TickerProviderStateMixin {
                     iconSize: iconSize,
                     lineMaxHeight: lineMaxHeight,
                   ),
+                  if (_isFabShown)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 16),
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: FloatingActionButton(
+                          elevation: 0,
+                          backgroundColor: Colors.redAccent,
+                          child: AnimatedBuilder(
+                            animation: _fabAnimation,
+                            child: Icon(
+                              Icons.fingerprint,
+                              color: Colors.white,
+                            ),
+                            builder: (context, child) => Transform.rotate(
+                              angle: _fabAnimation.value,
+                              child: child,
+                            ),
+                          ),
+                          onPressed: () => _fabController.forward(),
+                        ),
+                      ),
+                    ),
                 ],
               ),
             ),
