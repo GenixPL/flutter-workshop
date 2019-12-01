@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:animator/animator.dart';
 import 'package:flutter/material.dart';
 
 class CardsAnim extends StatefulWidget {
@@ -34,6 +37,7 @@ class _CardsAnimState extends State<CardsAnim> {
   @override
   Widget build(BuildContext context) {
     double maxHeight = widget.lineMaxHeight + 16;
+    double spacing = maxHeight * 0.65 / 3;
 
     return Positioned(
       top: 8,
@@ -43,22 +47,23 @@ class _CardsAnimState extends State<CardsAnim> {
         height: maxHeight,
         child: Stack(
           children: <Widget>[
-            for (int i = 0; i < 4; i++) _buildDot(i, maxHeight),
+            for (int i = 3; i >= 0; i--)
+              _buildLine(i, maxHeight - 20 - (3 - i) * spacing + 8),
+            for (int i = 0; i < 4; i++)
+              _buildDot(i, maxHeight - 20 - i * spacing),
           ],
         ),
       ),
     );
   }
 
-  _buildDot(int i, double maxHeight) {
+  _buildDot(int i, double top) {
     if (_animation.value < 50 * i + 50) {
       return Container();
     }
 
-    double spacing = maxHeight * 0.65 / 3;
-
     return Positioned(
-      top: maxHeight - 20 - i * spacing,
+      top: top,
       left: widget.availableWidth / 2 - 10,
       child: Container(
         width: 20,
@@ -82,6 +87,40 @@ class _CardsAnimState extends State<CardsAnim> {
               shape: BoxShape.circle,
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  _buildLine(int i, double top) {
+    if (_animation.value < 50 * i + 250) {
+      return Container();
+    }
+
+    if (i % 2 == 0) {
+      return Positioned(
+        top: top,
+        left: widget.availableWidth / 2,
+        child: Animator<double>(
+          tween: Tween(begin: 0.0, end: 1.0),
+          builder: (anim) => Container(
+            width: 60 * anim.value,
+            height: 2,
+            color: Colors.grey[400],
+          ),
+        ),
+      );
+    }
+
+    return Positioned(
+      top: top,
+      right: widget.availableWidth / 2,
+      child: Animator<double>(
+        tween: Tween(begin: 0.0, end: 1.0),
+        builder: (anim) => Container(
+          width: 60 * anim.value,
+          height: 2,
+          color: Colors.grey[400],
         ),
       ),
     );
