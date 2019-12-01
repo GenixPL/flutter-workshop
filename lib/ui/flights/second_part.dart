@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workshop/ui/flights/animations/cards_anim.dart';
 import 'package:workshop/ui/flights/animations/plane_position_anim.dart';
 import 'package:workshop/ui/flights/animations/plane_size_anim.dart';
 
@@ -21,8 +22,8 @@ class _SecondPartState extends State<SecondPart> with TickerProviderStateMixin {
   double iconSize = 44;
 
   AnimationController _planeSizeController;
-
   AnimationController _planePositionController;
+  AnimationController _cardsAnimationController;
 
   double lineMaxHeight;
   double _planeStartPosition;
@@ -33,6 +34,11 @@ class _SecondPartState extends State<SecondPart> with TickerProviderStateMixin {
 
     lineMaxHeight = (widget.availableHeight - iconSize - 16) * 0.7;
     _planeStartPosition = widget.availableHeight - 16 - iconSize;
+
+    _cardsAnimationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 1500),
+    );
 
     _planePositionController = AnimationController(
       vsync: this,
@@ -45,6 +51,9 @@ class _SecondPartState extends State<SecondPart> with TickerProviderStateMixin {
     )..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
           _planePositionController.forward();
+          Future.delayed(Duration(milliseconds: 800)).then((_) {
+            _cardsAnimationController.forward();
+          });
         }
       });
 
@@ -63,15 +72,19 @@ class _SecondPartState extends State<SecondPart> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.yellow, // to remove
       child: Row(
         children: <Widget>[
           Expanded(
             child: Container(
-              color: Colors.blueAccent, // to remove
               child: Stack(
                 children: <Widget>[
                   _buildPlaneAnimations(),
+                  CardsAnim(
+                    availableWidth: widget.availableWidth,
+                    cardsAnimationController: _cardsAnimationController,
+                    iconSize: iconSize,
+                    lineMaxHeight: lineMaxHeight,
+                  ),
                 ],
               ),
             ),

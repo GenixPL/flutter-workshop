@@ -48,12 +48,10 @@ class _PlanePositionAnimState extends State<PlanePositionAnim> {
         (widget.planeStartPosition - planeCurrentPosition) /
             widget.planeStartPosition;
 
-
     return Positioned(
       top: _planePositionAnimation.value,
       left: widget.availableWidth / 2 - widget.iconSize / 2,
       child: Container(
-        color: Colors.lime,
         width: widget.iconSize,
         child: Stack(
           children: <Widget>[
