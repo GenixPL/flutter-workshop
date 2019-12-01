@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
 class TopBarFlights extends StatelessWidget {
+  final bool areButtonsHidden;
+
+  TopBarFlights({
+    this.areButtonsHidden = false,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,11 +22,13 @@ class TopBarFlights extends StatelessWidget {
           ],
         ),
       ),
-      child: _buildContent(context),
+      child: (areButtonsHidden)
+          ? _buildWothoutButtons(context)
+          : _buildWithButtons(context),
     );
   }
 
-  Widget _buildContent(BuildContext context) {
+  Widget _buildWithButtons(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.15,
       child: Column(
@@ -52,6 +60,48 @@ class TopBarFlights extends StatelessWidget {
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildWothoutButtons(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 24),
+      child: Container(
+        height: MediaQuery.of(context).size.height * 0.15,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(left: 16),
+                        child: Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Text(
+                  'AirAsia',
+                  style: TextStyle(
+                    fontFamily: 'Yellowtail',
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
+                ),
+                Expanded(
+                  child: Container(),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -91,7 +141,4 @@ class TopBarFlights extends StatelessWidget {
       ),
     );
   }
-
-
-
 }

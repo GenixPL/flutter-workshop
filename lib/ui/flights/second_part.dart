@@ -9,11 +9,13 @@ class SecondPart extends StatefulWidget {
   final double mainContainerSize;
   final double availableHeight;
   final double availableWidth;
+  final Function onFabTap;
 
   SecondPart({
     @required this.mainContainerSize,
     @required this.availableHeight,
     @required this.availableWidth,
+    @required this.onFabTap,
   });
 
   @override
@@ -26,8 +28,6 @@ class _SecondPartState extends State<SecondPart> with TickerProviderStateMixin {
   AnimationController _planeSizeController;
   AnimationController _planePositionController;
   AnimationController _cardsAnimationController;
-  AnimationController _fabController;
-  Animation _fabAnimation;
 
   double lineMaxHeight;
   double _planeStartPosition;
@@ -40,16 +40,6 @@ class _SecondPartState extends State<SecondPart> with TickerProviderStateMixin {
 
     lineMaxHeight = (widget.availableHeight - iconSize - 16) * 0.7;
     _planeStartPosition = widget.availableHeight - 16 - iconSize;
-
-    _fabController = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 500),
-    );
-
-    _fabAnimation = Tween(
-      begin: pi * 0.25,
-      end: 0.0,
-    ).animate(_fabController);
 
     _cardsAnimationController = AnimationController(
       vsync: this,
@@ -115,18 +105,11 @@ class _SecondPartState extends State<SecondPart> with TickerProviderStateMixin {
                         child: FloatingActionButton(
                           elevation: 0,
                           backgroundColor: Colors.redAccent,
-                          child: AnimatedBuilder(
-                            animation: _fabAnimation,
-                            child: Icon(
-                              Icons.fingerprint,
-                              color: Colors.white,
-                            ),
-                            builder: (context, child) => Transform.rotate(
-                              angle: _fabAnimation.value,
-                              child: child,
-                            ),
+                          child: Icon(
+                            Icons.done,
+                            color: Colors.white,
                           ),
-                          onPressed: () => _fabController.forward(),
+                          onPressed: widget.onFabTap,
                         ),
                       ),
                     ),
