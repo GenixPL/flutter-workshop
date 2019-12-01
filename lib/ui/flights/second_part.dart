@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workshop/ui/flights/animations/plane_size_anim.dart';
 
 class SecondPart extends StatefulWidget {
   final double mainContainerSize;
@@ -19,7 +20,6 @@ class _SecondPartState extends State<SecondPart> with TickerProviderStateMixin {
   double iconSize = 44;
 
   AnimationController _planeSizeController;
-  Animation _planeSizeAnimation;
 
   AnimationController _planePositionController;
   Animation _planePositionCurve;
@@ -48,11 +48,6 @@ class _SecondPartState extends State<SecondPart> with TickerProviderStateMixin {
           _planePositionController.forward();
         }
       });
-
-    _planeSizeAnimation = Tween(
-      begin: 2.0,
-      end: 1.0,
-    ).animate(_planeSizeController);
 
     _planePositionCurve = CurvedAnimation(
       parent: _planePositionController,
@@ -98,21 +93,12 @@ class _SecondPartState extends State<SecondPart> with TickerProviderStateMixin {
   }
 
   Widget _buildPlaneAnimations() {
-    // 16 for FAB padding
-
     return AnimatedBuilder(
       animation: _planePositionAnimation,
       builder: (context, child) => Positioned(
         top: _planePositionAnimation.value,
         left: widget.availableWidth / 2 - iconSize / 2,
-        child: AnimatedBuilder(
-          animation: _planeSizeAnimation,
-          child: _buildPlane(iconSize),
-          builder: (context, child) => Transform.scale(
-            child: child,
-            scale: _planeSizeAnimation.value,
-          ),
-        ),
+        child: _buildPlane(iconSize),
       ),
     );
   }
@@ -138,13 +124,9 @@ class _SecondPartState extends State<SecondPart> with TickerProviderStateMixin {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 1), // why isn't it symmetical
-            child: Icon(
-              Icons.airplanemode_active,
-              size: iconSize,
-              color: Colors.redAccent,
-            ),
+          PlaneSizeAnim(
+            iconSize: iconSize,
+            planeSizeController: _planeSizeController,
           ),
         ],
       ),
