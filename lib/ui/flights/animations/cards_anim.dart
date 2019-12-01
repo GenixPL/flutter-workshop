@@ -38,19 +38,22 @@ class _CardsAnimState extends State<CardsAnim> {
   Widget build(BuildContext context) {
     double maxHeight = widget.lineMaxHeight + 16;
     double spacing = maxHeight * 0.65 / 3;
+    double cardHeight = widget.lineMaxHeight / 4;
 
     return Positioned(
       top: 8,
       left: 0,
       child: Container(
         width: widget.availableWidth,
-        height: maxHeight,
+        height: maxHeight + cardHeight,
         child: Stack(
           children: <Widget>[
             for (int i = 3; i >= 0; i--)
               _buildLine(i, maxHeight - 20 - (3 - i) * spacing + 8),
             for (int i = 0; i < 4; i++)
               _buildDot(i, maxHeight - 20 - i * spacing),
+            for (int i = 0; i < 4; i++)
+              _buildCard(i, maxHeight - 20 - (3 - i) * spacing + 8, cardHeight),
           ],
         ),
       ),
@@ -102,11 +105,12 @@ class _CardsAnimState extends State<CardsAnim> {
         top: top,
         left: widget.availableWidth / 2,
         child: Animator<double>(
+          duration: Duration(milliseconds: 200),
           tween: Tween(begin: 0.0, end: 1.0),
           builder: (anim) => Container(
             width: 60 * anim.value,
             height: 2,
-            color: Colors.grey[400],
+            color: Colors.grey[300],
           ),
         ),
       );
@@ -116,13 +120,66 @@ class _CardsAnimState extends State<CardsAnim> {
       top: top,
       right: widget.availableWidth / 2,
       child: Animator<double>(
+        duration: Duration(milliseconds: 50),
         tween: Tween(begin: 0.0, end: 1.0),
         builder: (anim) => Container(
           width: 60 * anim.value,
           height: 2,
-          color: Colors.grey[400],
+          color: Colors.grey[300],
         ),
       ),
+    );
+  }
+
+  _buildCard(int i, double top, double cardHeight) {
+    if (_animation.value < 50 * i + 450) {
+      return Container();
+    }
+
+    var cardWidth = (widget.availableWidth / 2 - 60) * 0.8;
+
+    if (i % 2 == 0) {
+      return Positioned(
+        top: top - cardHeight / 2,
+        left: widget.availableWidth / 2 + 60,
+        child: Animator<double>(
+          tween: Tween(begin: 0.0, end: 1.0),
+          builder: (anim) => Container(
+            width: cardWidth * anim.value,
+            height: cardHeight,
+            decoration: BoxDecoration(
+              color: Colors.grey[300],
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: _buildTileContent('DUPA'),
+          ),
+        ),
+      );
+    }
+
+    return Positioned(
+      top: top - cardHeight / 2,
+      right: widget.availableWidth / 2 + 60,
+      child: Animator<double>(
+        tween: Tween(begin: 0.0, end: 1.0),
+        builder: (anim) => Container(
+          width: cardWidth * anim.value,
+          height: cardHeight,
+          decoration: BoxDecoration(
+            color: Colors.grey[300],
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: _buildTileContent('DUPA'),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTileContent(String text) {
+    return Column(
+      children: <Widget>[
+        Text(text),
+      ],
     );
   }
 }
