@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:animator/animator.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class CardsAnim extends StatefulWidget {
@@ -110,7 +111,7 @@ class _CardsAnimState extends State<CardsAnim> {
           builder: (anim) => Container(
             width: 60 * anim.value,
             height: 2,
-            color: Colors.grey[300],
+            color: Colors.grey[200],
           ),
         ),
       );
@@ -125,12 +126,13 @@ class _CardsAnimState extends State<CardsAnim> {
         builder: (anim) => Container(
           width: 60 * anim.value,
           height: 2,
-          color: Colors.grey[300],
+          color: Colors.grey[200],
         ),
       ),
     );
   }
 
+  // TODO: possible better transformation
   _buildCard(int i, double top, double cardHeight) {
     if (_animation.value < 50 * i + 450) {
       return Container();
@@ -143,15 +145,30 @@ class _CardsAnimState extends State<CardsAnim> {
         top: top - cardHeight / 2,
         left: widget.availableWidth / 2 + 60,
         child: Animator<double>(
+          duration: Duration(milliseconds: 200),
           tween: Tween(begin: 0.0, end: 1.0),
           builder: (anim) => Container(
             width: cardWidth * anim.value,
             height: cardHeight,
             decoration: BoxDecoration(
-              color: Colors.grey[300],
+              color: Colors.grey[200],
               borderRadius: BorderRadius.circular(8),
             ),
-            child: _buildTileContent('DUPA'),
+            child: (i == 1)
+              ? _buildTileContent(
+                  'JFK-ORY',
+                  '6h25m',
+                  'JUN )%',
+                  '\$851',
+                  '9:26am-3:43pm',
+                )
+              : _buildTileContent(
+                  'ERT-TVS',
+                  '6h25m',
+                  'JUN 20',
+                  '\$718',
+                  '9:26am-3:43pm',
+                ),
           ),
         ),
       );
@@ -161,25 +178,122 @@ class _CardsAnimState extends State<CardsAnim> {
       top: top - cardHeight / 2,
       right: widget.availableWidth / 2 + 60,
       child: Animator<double>(
+        duration: Duration(milliseconds: 200),
         tween: Tween(begin: 0.0, end: 1.0),
         builder: (anim) => Container(
           width: cardWidth * anim.value,
           height: cardHeight,
           decoration: BoxDecoration(
-            color: Colors.grey[300],
+            color: Colors.grey[200],
             borderRadius: BorderRadius.circular(8),
           ),
-          child: _buildTileContent('DUPA'),
+          child: (i == 1)
+              ? _buildTileContent(
+                  'MRG-FTB',
+                  '6h25m',
+                  'JUN 20',
+                  '\$532',
+                  '9:26am-3:43pm',
+                )
+              : _buildTileContent(
+                  'KKR-RTY',
+                  '6h25m',
+                  'JUN 20',
+                  '\$663',
+                  '9:26am-3:43pm',
+                ),
         ),
       ),
     );
   }
 
-  Widget _buildTileContent(String text) {
-    return Column(
-      children: <Widget>[
-        Text(text),
-      ],
+  Widget _buildTileContent(
+    String text1,
+    String text2,
+    String text3,
+    String text4,
+    String text5,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.all(4),
+      child: Column(
+        children: <Widget>[
+          Expanded(
+            child: Row(
+              children: <Widget>[
+                Flexible(
+                  flex: 6,
+                  child: Text(
+                    text1,
+                    maxLines: 1,
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+                Spacer(),
+                Flexible(
+                  flex: 4,
+                  child: Text(
+                    text2,
+                    maxLines: 1,
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Row(
+              children: <Widget>[
+                Flexible(
+                  flex: 6,
+                  child: AutoSizeText(
+                    text3,
+                    maxLines: 1,
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+                Spacer(),
+                Flexible(
+                  flex: 4,
+                  child: AutoSizeText(
+                    text4,
+                    maxLines: 1,
+                    style: TextStyle(
+                      fontSize: 8,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Row(
+              children: <Widget>[
+                Flexible(
+                  child: AutoSizeText(
+                    text5,
+                    maxLines: 1,
+                    style: TextStyle(
+                      fontSize: 6,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
