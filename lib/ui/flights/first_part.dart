@@ -368,7 +368,10 @@ class _FirstPartState extends State<FirstPart>
           child: FloatingActionButton(
             onPressed: widget.onFabTap,
             backgroundColor: Colors.redAccent,
-            child: Icon(Icons.timeline),
+            child: Icon(
+              Icons.timeline,
+              color: Colors.white,
+            ),
           ),
         ),
       ],

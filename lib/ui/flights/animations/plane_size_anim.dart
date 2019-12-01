@@ -13,8 +13,7 @@ class PlaneSizeAnim extends StatefulWidget {
   _PlaneSizeAnimState createState() => _PlaneSizeAnimState();
 }
 
-class _PlaneSizeAnimState extends State<PlaneSizeAnim>
-    with TickerProviderStateMixin {
+class _PlaneSizeAnimState extends State<PlaneSizeAnim> {
   Animation _planeSizeAnimation;
 
   @override
